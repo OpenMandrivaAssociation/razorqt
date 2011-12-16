@@ -19,6 +19,7 @@ Requires:	%{name}-appswitcher = %{version}, %{name}-runner = %{version}
 Requires:	%{name}-config = %{version}, %{name}-data = %{version}
 Requires:	razorqtlibs qtxdglib
 BuildRequires:	libudev-devel >= 128
+BuildRequires:	doxygen
 
 #Recommends:	qterminal, juffed, ptbatterysystemtray, qlipper, qxkb, qasmixer, screengrab
 
