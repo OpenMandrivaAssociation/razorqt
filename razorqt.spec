@@ -28,7 +28,7 @@ BuildRequires:	libudev-devel >= 128
 Summary:	RazorQt development package
 Url:		http://razor-qt.org
 Group:		Development/C
-Requires:	%{razolibs} = %{version}-%{release}
+Requires:	razorqtlibs = %{version}-%{release}
 Obsoletes:	razorqt-x11info <= %{version}
 
 %package -n	%{razorlibs}
