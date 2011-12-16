@@ -12,7 +12,6 @@ License:	LGPL
 Source:		razorqt-%{version}.tar.bz2
 Group:		Graphical desktop/Other
 Summary:	Razor a lightweight desktop toolbox
-Vendor:		Razor-qt team
 Url:		http://razor-qt.org
 BuildRequires:	gcc-c++ cmake make file-devel libqt4-devel qt4-linguist libxcomposite-devel
 Requires:	%{name}-desktop = %{version}, %{name}-panel = %{version}, %{name}-session = %{version}
