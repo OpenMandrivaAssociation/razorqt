@@ -28,7 +28,7 @@ BuildRequires:	libudev-devel >= 128
 Summary:	RazorQt development package
 Url:		http://razor-qt.org
 Group:		Development/C
-Requires:	%{razolibs} = %{version}
+Requires:	%{razolibs} = %{version}-%{release}
 Obsoletes:	razorqt-x11info <= %{version}
 
 %package -n	%{razorlibs}
@@ -39,20 +39,20 @@ Requires:	upower
 #Requires:	oxygen-icon-theme
 # names before 0.4
 Obsoletes:	razorqt-libs <= %{version}, librazorqt0 <= %{version}
-Provides:	razorqtlibs = %{version}
+Provides:	razorqtlibs = %{version}-%{release}
 
 %package	-n %{libname}
 Url:		http://razor-qt.org
 Summary:	QtXdg library
 Group:		System/Libraries
-Provides:	qtxdglib = %{version}
+Provides:	qtxdglib = %{version}-%{release}
 
 %package	-n %{develname}
 Url:		http://razor-qt.org
 Summary:	Development files for QtXdg library
 Group:		Development/C
-Requires:	%{libname} = %{version}
-Provides:	qtxdglib-devel = %{version}
+Requires:	%{libname} = %{version}-%{release}
+Provides:	qtxdglib-devel = %{version}-%{release}
 
 %package	appswitcher
 Url:		http://razor-qt.org
