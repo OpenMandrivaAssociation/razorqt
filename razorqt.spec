@@ -6,10 +6,10 @@
 
 
 Name:		razorqt
-Version:	0.4.0
+Version:	0.4.1
 Release:	1
 License:	LGPL
-Source:		razorqt-%{version}.tar.bz2
+Source0:	https://github.com/downloads/Razor-qt/razor-qt/razorqt-%{version}.tar.bz2
 Group:		Graphical desktop/Other
 Summary:	Razor a lightweight desktop toolbox
 Url:		http://razor-qt.org
@@ -18,7 +18,7 @@ Requires:	%{name}-desktop = %{version}, %{name}-panel = %{version}, %{name}-sess
 Requires:	%{name}-appswitcher = %{version}, %{name}-runner = %{version}
 Requires:	%{name}-config = %{version}, %{name}-data = %{version}
 Requires:	razorqtlibs qtxdglib
-BuildRequires:	libudev-devel >= 128
+BuildRequires:	udev-devel >= 128
 BuildRequires:	doxygen libxcursor-devel
 
 #Recommends:	qterminal, juffed, ptbatterysystemtray, qlipper, qxkb, qasmixer, screengrab
@@ -96,6 +96,11 @@ Url:		http://razor-qt.org
 Summary:	RazorQt config tools
 Group:		System/X11
 
+%package	power
+Url:		http://razor-qt.org
+Summary:	RazorQt config tools
+Group:		System/X11
+
 %description
 Description:	%{summary}
 
@@ -132,11 +137,15 @@ Description:	%{summary}
 %description	session
 Description:	%{summary}
 
+%description    power
+Description:    %{summary}
+
 %prep
 %setup -q
 
 %build
-%cmake_qt4 '-DCMAKE_MODULE_LINKER_FLAGS:STRING=-Wl,--as-needed -Wl,-z,relro -Wl,-O1 -Wl,--build-id -Wl,--enable-new-dtags, -lX11' '-DCMAKE_SHARED_LINKER_FLAGS:STRING='
+#%  cmake_qt4 '-DCMAKE_MODULE_LINKER_FLAGS:STRING=-Wl,--as-needed -Wl,-z,relro -Wl,-O1 -Wl,--build-id -Wl,--enable-new-dtags, -lX11' '-DCMAKE_SHARED_LINKER_FLAGS:STRING='
+%cmake_qt4
 %make
 
 %install
@@ -157,6 +166,8 @@ cd build/
 %files  -n %{develname}
 %{_libdir}/libqtxdg.so
 %{_includedir}/qtxdg/
+%{_libdir}/pkgconfig/*
+
 
 %files	devel
 %{_libdir}/librazor*.so
@@ -170,7 +181,6 @@ cd build/
 %{_bindir}/razor-desktop
 %{_bindir}/razor-config-desktop
 %{_libdir}/razor-desktop
-%{_datadir}/applications/razor-config-desktop.desktop
 %dir %{_datadir}/razor
 %{_datadir}/razor/desktop.conf
 %{_datadir}/razor/razor-desktop/
@@ -188,10 +198,12 @@ cd build/
 %{_bindir}/razor-config
 %{_bindir}/razor-config-mouse
 %{_bindir}/razor-config-appearance
-%{_datadir}/applications/razor-config.desktop
-%{_datadir}/applications/razor-config-mouse.desktop
-%{_datadir}/applications/razor-config-appearance.desktop
 %{_datadir}/razor/razor-config/
+
+%files power
+%{_bindir}/razor-autosuspend
+%{_bindir}/razor-power
+%{_datadir}/razor/razor-power/*.qm
 
 %files	session
 %{_bindir}/razor-session
@@ -202,7 +214,6 @@ cd build/
 %dir %{_datadir}/apps/kdm
 %dir %{_datadir}/apps/kdm/sessions
 %{_datadir}/apps/kdm/sessions/razor*.desktop
-%{_datadir}/applications/razor-config-session.desktop
 %{_datadir}/razor/session*.conf
 %{_datadir}/razor/razor-session/
 
@@ -210,9 +221,12 @@ cd build/
 %{_datadir}/razor/razor.conf
 %{_datadir}/razor/graphics/
 %{_datadir}/razor/themes/
+%{_datadir}/applications/*.desktop
 %config /etc/xdg/menus/razor-applications.menu
 %dir /etc/xdg/menus
+%{_sysconfdir}/xdg/autostart/*.desktop
 %{_datadir}/desktop-directories/razor*
 %dir %{_datadir}/desktop-directories
 # temp files - it will be removed when it becomes part of upstream
 %{_libdir}/razor-xdg-tools
+%{_iconsdir}/hicolor/scalable/apps/*.svg
