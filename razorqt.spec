@@ -7,7 +7,7 @@
 
 Name:		razorqt
 Version:	0.4.1
-Release:	1
+Release:	2
 License:	LGPL
 Source0:	https://github.com/downloads/Razor-qt/razor-qt/razorqt-%{version}.tar.bz2
 Group:		Graphical desktop/Other
@@ -17,6 +17,7 @@ BuildRequires:	gcc-c++ cmake make file-devel libqt4-devel qt4-linguist libxcompo
 Requires:	%{name}-desktop = %{version}, %{name}-panel = %{version}, %{name}-session = %{version}
 Requires:	%{name}-appswitcher = %{version}, %{name}-runner = %{version}
 Requires:	%{name}-config = %{version}, %{name}-data = %{version}
+Requires:	%{name}-power = %{version} 
 Requires:	razorqtlibs qtxdglib
 BuildRequires:	udev-devel >= 128
 BuildRequires:	doxygen libxcursor-devel
