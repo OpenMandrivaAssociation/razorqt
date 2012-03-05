@@ -13,7 +13,7 @@ Source0:	https://github.com/downloads/Razor-qt/razor-qt/razorqt-%{version}.tar.b
 Group:		Graphical desktop/Other
 Summary:	Razor a lightweight desktop toolbox
 Url:		http://razor-qt.org
-BuildRequires:	gcc-c++ cmake make libmagic-devel libqt4-devel qt4-linguist libxcomposite-devel
+BuildRequires:	gcc-c++ cmake make magic-devel libqt4-devel qt4-linguist libxcomposite-devel
 Requires:	%{name}-desktop = %{version}, %{name}-panel = %{version}, %{name}-session = %{version}
 Requires:	%{name}-appswitcher = %{version}, %{name}-runner = %{version}
 Requires:	%{name}-config = %{version}, %{name}-data = %{version}
