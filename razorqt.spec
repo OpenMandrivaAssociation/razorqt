@@ -7,7 +7,7 @@
 
 Name:		razorqt
 Version:	0.4.1
-Release:	2
+Release:	3
 License:	LGPL
 Source0:	https://github.com/downloads/Razor-qt/razor-qt/razorqt-%{version}.tar.bz2
 Group:		Graphical desktop/Other
@@ -71,7 +71,7 @@ Requires:	%{name}-data
 Url:		http://razor-qt.org
 Summary:	RazorQt panel
 Group:		System/X11
-Requires:	%{name}-data xscreensaver
+Requires:	%{name}-data xscreensaver 
 
 %package	data
 Url:		http://razor-qt.org
