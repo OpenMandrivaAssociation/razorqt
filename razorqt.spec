@@ -7,7 +7,7 @@
 
 Name:		razorqt
 Version:	0.4.1
-Release:	3
+Release:	4
 License:	LGPL
 Source0:	https://github.com/downloads/Razor-qt/razor-qt/razorqt-%{version}.tar.bz2
 Group:		Graphical desktop/Other
