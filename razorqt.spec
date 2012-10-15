@@ -46,7 +46,6 @@ License:	LGPLv2+
 
 %files -n	%librazormount
 %_libdir/lib%{_name}mount.so.%{librazormount_major}*
-%{_libdir}/pkgconfig/%{_name}mount.pc
 
 #------------------------------------------------------------------------------
 
@@ -63,7 +62,6 @@ License:	LGPLv2+
 
 %files -n	%librazorqt
 %_libdir/lib%{_name}qt.so.%{librazorqt_major}*
-%{_libdir}/pkgconfig/%{name}.pc
 
 #------------------------------------------------------------------------------
 
@@ -82,7 +80,6 @@ License:	BSD
 %files -n	%librazorqxt
 %doc libraries/%{_name}qxt/LICENSE
 %_libdir/lib%{_name}qxt.so.%{librazorqxt_major}*
-%{_libdir}/pkgconfig/%{_name}qxt.pc
 
 #------------------------------------------------------------------------------
 
@@ -119,6 +116,9 @@ License:	GPLv2 and LGPLv2+
 %{_libdir}/lib%{_name}*.so
 %{_includedir}/%{_name}*/
 %{_bindir}/%{_name}-x11info
+%{_libdir}/pkgconfig/%{_name}mount.pc
+%{_libdir}/pkgconfig/%{_name}qxt.pc
+%{_libdir}/pkgconfig/%{name}.pc
 
 #------------------------------------------------------------------------------
 
