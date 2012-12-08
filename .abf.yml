@@ -1,2 +1,4 @@
+removed_sources:
+  razorqt-0.5.0.tar.bz2: d15b1b7235bf75718949b1d89dc68557c39fc041
 sources:
-  "razorqt-0.5.0.tar.bz2:"	d15b1b7235bf75718949b1d89dc68557c39fc041
+  razorqt-0.5.1.tar.bz2: 6e419782a0d1d54a2f6b40713fa32f3005311bea

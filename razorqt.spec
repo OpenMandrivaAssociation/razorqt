@@ -3,7 +3,7 @@
 %define _name		razor
 
 Name:		%{_name}qt
-Version:	0.5.0
+Version:	0.5.1
 Release:	%mkrel 1
 License:	LGPLv2+
 Source0:	https://github.com/downloads/Razor-qt/razor-qt/%{name}-%{version}.tar.bz2
@@ -506,6 +506,9 @@ RazorQt policykit integration.
 
 %prep
 %setup -q
+# silence rpmlint's complains about non-readable
+# source files in debuginfo
+find . -name "*.cpp" -o -name "*.h" -o -name LICENSE |xargs chmod 0644
 
 %build
 %cmake_qt4
