@@ -3,7 +3,7 @@
 %define _name		razor
 
 Name:		%{_name}qt
-Version:	0.5.1
+Version:	0.5.2
 Release:	%mkrel 1
 License:	LGPLv2+
 Source0:	https://github.com/downloads/Razor-qt/razor-qt/%{name}-%{version}.tar.bz2
@@ -297,6 +297,7 @@ Requires:	%{name}-config-notificationd
 
 %files		notificationd
 %{_bindir}/%{_name}-notificationd
+%{_datadir}/%{_name}/%{_name}-notificationd/*.qm
 
 #--------------------------------------------------------------------
 
@@ -334,6 +335,7 @@ Obsoletes:	%{name}-openbox <= %{version}, %{name}-wm <= %{version}
 %{_bindir}/%{_name}-session
 %{_bindir}/%{_name}-about
 %{_bindir}/%{_name}-openssh-askpass
+%{_datadir}/%{_name}/%{_name}-openssh-askpass/%{_name}-openssh-askpass*.qm
 %{_bindir}/start%{_name}
 %{_datadir}/applications/%{_name}-about.desktop
 %{_sysconfdir}/%{_name}/session.conf
@@ -392,6 +394,7 @@ Requires:	%{name}-config = %{version}-%{release}
 %files		config-notificationd	
 %{_bindir}/%{_name}-config-notificationd
 %{_datadir}/applications/%{_name}-config-notificationd.desktop
+%{_datadir}/%{_name}/%{_name}-config-notificationd/*.qm
 
 #--------------------------------------------------------------------
 
@@ -500,6 +503,7 @@ Group:		System/X11
 RazorQt policykit integration.
 
 %files policykit
+%{_datadir}/%{_name}/%{_name}-policykit-agent/%{_name}-policykit-agent*.qm
 %{_bindir}/razor-policykit-agent
 
 #--------------------------------------------------------------------
@@ -513,6 +517,8 @@ find . -name "*.cpp" -o -name "*.h" -o -name LICENSE |xargs chmod 0644
 %build
 %cmake_qt4
 %make 
+
+#% find_lang %{name}
 
 %install
 %makeinstall_std -C build
