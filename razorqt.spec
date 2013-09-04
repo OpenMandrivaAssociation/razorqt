@@ -1,15 +1,18 @@
 %define qtxdglibdevel	%mklibname qtxdg -d
 %define libnamedevel	%mklibname  %name -d
-%define _name		razor
+%define oname		razor
 
-Name:		%{_name}qt
+Name:		%{oname}qt
 Version:	0.5.2
 Release:	%mkrel 1
 License:	LGPLv2+
 Source0:	https://github.com/downloads/Razor-qt/razor-qt/%{name}-%{version}.tar.bz2
 Group:		Graphical desktop/Other
 Summary:	Razor is a lightweight desktop toolbox
-Url:		http://%{_name}-qt.org
+Url:		http://%{oname}-qt.org
+
+Patch0:		%{oname}-panel-quicklaunch.patch
+Patch1:		razorqt-0.5.2-fix-build-with-latest-lightdm.patch
 
 BuildRequires:	gcc-c++
 BuildRequires:	cmake
@@ -20,6 +23,8 @@ BuildRequires:	qt4-linguist
 BuildRequires:	pkgconfig(xcomposite)
 BuildRequires:	pkgconfig(udev)
 BuildRequires:	pkgconfig(polkit-qt-1)
+BuildRequires:	pkgconfig(liblightdm-qt-3)
+BuildRequires:	pkgconfig(polkit-qt-agent-1)
 BuildRequires:	pkgconfig(xcursor)
 BuildRequires:	pkgconfig(libpulse)
 BuildRequires:	pkgconfig(libstatgrab)
@@ -45,7 +50,7 @@ License:	LGPLv2+
 %{summary}
 
 %files -n	%librazormount
-%_libdir/lib%{_name}mount.so.%{librazormount_major}*
+%_libdir/lib%{oname}mount.so.%{librazormount_major}*
 
 #------------------------------------------------------------------------------
 
@@ -61,7 +66,7 @@ License:	LGPLv2+
 %{summary}
 
 %files -n	%librazorqt
-%_libdir/lib%{_name}qt.so.%{librazorqt_major}*
+%_libdir/lib%{oname}qt.so.%{librazorqt_major}*
 
 #------------------------------------------------------------------------------
 
@@ -78,8 +83,8 @@ License:	BSD
 %{summary}
 
 %files -n	%librazorqxt
-%doc libraries/%{_name}qxt/LICENSE
-%_libdir/lib%{_name}qxt.so.%{librazorqxt_major}*
+%doc libraries/%{oname}qxt/LICENSE
+%_libdir/lib%{oname}qxt.so.%{librazorqxt_major}*
 
 #------------------------------------------------------------------------------
 
@@ -113,11 +118,11 @@ License:	GPLv2 and LGPLv2+
 %{summary}
 
 %files -n	%libnamedevel
-%{_libdir}/lib%{_name}*.so
-%{_includedir}/%{_name}*/
-%{_bindir}/%{_name}-x11info
-%{_libdir}/pkgconfig/%{_name}mount.pc
-%{_libdir}/pkgconfig/%{_name}qxt.pc
+%{_libdir}/lib%{oname}*.so
+%{_includedir}/%{oname}*/
+%{_bindir}/%{oname}-x11info
+%{_libdir}/pkgconfig/%{oname}mount.pc
+%{_libdir}/pkgconfig/%{oname}qxt.pc
 %{_libdir}/pkgconfig/%{name}.pc
 
 #------------------------------------------------------------------------------
@@ -151,7 +156,7 @@ Obsoletes:	%{name}-appswitcher <= 0.4.1
 %{summary}
 
 %files		appswitcher
-%{_bindir}/%{_name}-appswitcher
+%{_bindir}/%{oname}-appswitcher
 
 #--------------------------------------------------------------------
 
@@ -169,11 +174,11 @@ Obsoletes:	%{name}-desktop <= 0.4.1
 %{summary}
 
 %files		desktop
-%{_bindir}/%{_name}-desktop
-%{_libdir}/%{_name}-desktop
-%dir %{_datadir}/%{_name}
-%{_sysconfdir}/%{_name}/desktop.conf
-%{_datadir}/%{_name}/%{_name}-desktop/
+%{_bindir}/%{oname}-desktop
+%{_libdir}/%{oname}-desktop
+%dir %{_datadir}/%{oname}
+%{_sysconfdir}/%{oname}/desktop.conf
+%{_datadir}/%{oname}/%{oname}-desktop/
 
 #--------------------------------------------------------------------
 
@@ -192,10 +197,10 @@ Obsoletes:	%{name}-panel <= 0.4.1
 %{summary}
 
 %files		panel
-%{_bindir}/%{_name}-panel
-%{_libdir}/%{_name}-panel/
-%{_datadir}/%{_name}/%{_name}-panel/
-%{_sysconfdir}/%{_name}/%{_name}-panel/panel.conf
+%{_bindir}/%{oname}-panel
+%{_libdir}/%{oname}-panel/
+%{_datadir}/%{oname}/%{oname}-panel/
+%{_sysconfdir}/%{oname}/%{oname}-panel/panel.conf
 
 #--------------------------------------------------------------------
 
@@ -210,20 +215,20 @@ Obsoletes:	%{name}-data <= 0.4.1
 %{summary}
 
 %files		data
-%dir %{_datadir}/%{_name}
-%dir %{_datadir}/%{_name}/themes
-%dir %{_datadir}/%{_name}/graphics
-%{_sysconfdir}/%{_name}/%{_name}.conf
-%{_datadir}/%{_name}/graphics/*
-%{_datadir}/%{_name}/themes/*
-%config %_sysconfdir/xdg/menus/%{_name}-applications.menu
+%dir %{_datadir}/%{oname}
+%dir %{_datadir}/%{oname}/themes
+%dir %{_datadir}/%{oname}/graphics
+%{_sysconfdir}/%{oname}/%{oname}.conf
+%{_datadir}/%{oname}/graphics/*
+%{_datadir}/%{oname}/themes/*
+%config %_sysconfdir/xdg/menus/%{oname}-applications.menu
 %config %_sysconfdir/xdg/autostart/*.desktop
-%config %_sysconfdir/%{_name}/windowmanagers.conf
-%{_datadir}/desktop-directories/%{_name}*
+%config %_sysconfdir/%{oname}/windowmanagers.conf
+%{_datadir}/desktop-directories/%{oname}*
 %{_datadir}/lib%{name}
 %{_datadir}/libqtxdg/
 # temp files - it will be removed when it becomes part of upstream
-%{_libdir}/%{_name}-xdg-tools
+%{_libdir}/%{oname}-xdg-tools
 %{_datadir}/icons/hicolor/scalable/apps/laptop-lid*
 
 #--------------------------------------------------------------------
@@ -240,11 +245,11 @@ License:	LGPLv2+
 %{summary}
 
 %files		autosuspend
-%{_bindir}/%{_name}-autosuspend
-#% {_datadir}/applications/% {_name}-autosuspend.desktop
-%dir %{_datadir}/%{_name}/%{_name}-autosuspend
-%{_datadir}/%{_name}/%{_name}-autosuspend/*
-%{_iconsdir}/hicolor/scalable/apps/%{_name}-autosuspend.svg
+%{_bindir}/%{oname}-autosuspend
+#% {_datadir}/applications/% {oname}-autosuspend.desktop
+%dir %{_datadir}/%{oname}/%{oname}-autosuspend
+%{_datadir}/%{oname}/%{oname}-autosuspend/*
+%{_iconsdir}/hicolor/scalable/apps/%{oname}-autosuspend.svg
 
 #--------------------------------------------------------------------
 
@@ -261,10 +266,10 @@ Obsoletes:	%{name}-power <= 0.4.1
 %{summary}
 
 %files		power
-%{_bindir}/%{_name}-power
-%dir %{_datadir}/%{_name}/%{_name}-power
-%{_datadir}/%{_name}/%{_name}-power/*.qm
-%{_datadir}/applications/%{_name}-power.desktop
+%{_bindir}/%{oname}-power
+%dir %{_datadir}/%{oname}/%{oname}-power
+%{_datadir}/%{oname}/%{oname}-power/*.qm
+%{_datadir}/applications/%{oname}-power.desktop
 
 #--------------------------------------------------------------------
 
@@ -281,9 +286,9 @@ Obsoletes:	%{name}-runner <= 0.4.1
 %{summary}
 
 %files		runner
-%{_bindir}/%{_name}-runner
-%dir %{_datadir}/%{_name}/%{_name}-runner
-%{_datadir}/%{_name}/%{_name}-runner/*
+%{_bindir}/%{oname}-runner
+%dir %{_datadir}/%{oname}/%{oname}-runner
+%{_datadir}/%{oname}/%{oname}-runner/*
 
 #--------------------------------------------------------------------
 
@@ -296,8 +301,8 @@ Requires:	%{name}-config-notificationd
 %{summary}
 
 %files		notificationd
-%{_bindir}/%{_name}-notificationd
-%{_datadir}/%{_name}/%{_name}-notificationd/*.qm
+%{_bindir}/%{oname}-notificationd
+%{_datadir}/%{oname}/%{oname}-notificationd/*.qm
 
 #--------------------------------------------------------------------
 
@@ -310,7 +315,7 @@ Requires:	%{name}-config-globalkeyshortcuts
 %{summary}
 
 %files		globalkeyshortcuts
-%{_bindir}/%{_name}-globalkeyshortcuts
+%{_bindir}/%{oname}-globalkeyshortcuts
 
 #--------------------------------------------------------------------
 
@@ -332,15 +337,15 @@ Obsoletes:	%{name}-openbox <= %{version}, %{name}-wm <= %{version}
 %{summary}
 
 %files		session
-%{_bindir}/%{_name}-session
-%{_bindir}/%{_name}-about
-%{_bindir}/%{_name}-openssh-askpass
-%{_datadir}/%{_name}/%{_name}-openssh-askpass/%{_name}-openssh-askpass*.qm
-%{_bindir}/start%{_name}
-%{_datadir}/applications/%{_name}-about.desktop
-%{_sysconfdir}/%{_name}/session.conf
-%dir %{_datadir}/%{_name}/%{_name}-session
-%{_datadir}/%{_name}/%{_name}-session/*
+%{_bindir}/%{oname}-session
+%{_bindir}/%{oname}-about
+%{_bindir}/%{oname}-openssh-askpass
+%{_datadir}/%{oname}/%{oname}-openssh-askpass/%{oname}-openssh-askpass*.qm
+%{_bindir}/start%{oname}
+%{_datadir}/applications/%{oname}-about.desktop
+%{_sysconfdir}/%{oname}/session.conf
+%dir %{_datadir}/%{oname}/%{oname}-session
+%{_datadir}/%{oname}/%{oname}-session/*
 %{_sysconfdir}/X11/wmsession.d/*
 
 #--------------------------------------------------------------------
@@ -358,13 +363,13 @@ Obsoletes:	%{name}-config <= 0.4.1
 %{summary}
 
 %files		config
-%{_bindir}/%{_name}-config
-%{_datadir}/applications/%{_name}-config.desktop
-%{_datadir}/applications/%{_name}-config-qtconfig.desktop
-%config %_sysconfdir/xdg/menus/%{_name}-config.menu
-%dir %{_datadir}/%{_name}/%{_name}-config
-%{_datadir}/%{_name}/%{_name}-config/razor-config-appearance*.qm
-%{_datadir}/%{_name}/%{_name}-config/%{_name}-config_*.qm
+%{_bindir}/%{oname}-config
+%{_datadir}/applications/%{oname}-config.desktop
+%{_datadir}/applications/%{oname}-config-qtconfig.desktop
+%config %_sysconfdir/xdg/menus/%{oname}-config.menu
+%dir %{_datadir}/%{oname}/%{oname}-config
+%{_datadir}/%{oname}/%{oname}-config/razor-config-appearance*.qm
+%{_datadir}/%{oname}/%{oname}-config/%{oname}-config_*.qm
 
 #--------------------------------------------------------------------
 
@@ -377,9 +382,9 @@ Requires:	%{name}-config = %{version}-%{release}
 %{summary}
 
 %files		config-globalkeyshortcuts	
-%{_bindir}/%{_name}-config-globalkeyshortcuts
-%{_datadir}/applications/%{_name}-config-globalkeyshortcuts.desktop
-%{_datadir}/%{_name}/%{_name}-config-globalkeyshortcuts/%{_name}-config-globalkeyshortcuts*.qm
+%{_bindir}/%{oname}-config-globalkeyshortcuts
+%{_datadir}/applications/%{oname}-config-globalkeyshortcuts.desktop
+%{_datadir}/%{oname}/%{oname}-config-globalkeyshortcuts/%{oname}-config-globalkeyshortcuts*.qm
 
 #--------------------------------------------------------------------
 
@@ -392,9 +397,9 @@ Requires:	%{name}-config = %{version}-%{release}
 %{summary}
 
 %files		config-notificationd	
-%{_bindir}/%{_name}-config-notificationd
-%{_datadir}/applications/%{_name}-config-notificationd.desktop
-%{_datadir}/%{_name}/%{_name}-config-notificationd/*.qm
+%{_bindir}/%{oname}-config-notificationd
+%{_datadir}/applications/%{oname}-config-notificationd.desktop
+%{_datadir}/%{oname}/%{oname}-config-notificationd/*.qm
 
 #--------------------------------------------------------------------
 
@@ -407,8 +412,8 @@ Requires:	%{name}-config = %{version}-%{release}
 %{summary}
 
 %files		config-desktop	
-%{_bindir}/%{_name}-config-desktop
-%{_datadir}/applications/%{_name}-config-desktop.desktop
+%{_bindir}/%{oname}-config-desktop
+%{_datadir}/applications/%{oname}-config-desktop.desktop
 
 
 #--------------------------------------------------------------------
@@ -422,9 +427,9 @@ Requires:	%{name}-config = %{version}-%{release}
 %{summary}
 
 %files		config-autosuspend	
-%{_bindir}/%{_name}-config-autosuspend
-%{_datadir}/applications/%{_name}-config-autosuspend.desktop
-%{_datadir}/%{_name}/%{_name}-config-autosuspend/%{_name}-config-autosuspend*.qm
+%{_bindir}/%{oname}-config-autosuspend
+%{_datadir}/applications/%{oname}-config-autosuspend.desktop
+%{_datadir}/%{oname}/%{oname}-config-autosuspend/%{oname}-config-autosuspend*.qm
 
 #--------------------------------------------------------------------
 
@@ -437,10 +442,10 @@ Requires:	%{name}-config = %{version}-%{release}
 %{summary}
 
 %files		config-session	
-%{_bindir}/%{_name}-config-session
-%{_datadir}/applications/%{_name}-config-session.desktop
-%dir %{_datadir}/%{_name}/%{_name}-config-session
-%{_datadir}/%{_name}/%{_name}-config-session/*
+%{_bindir}/%{oname}-config-session
+%{_datadir}/applications/%{oname}-config-session.desktop
+%dir %{_datadir}/%{oname}/%{oname}-config-session
+%{_datadir}/%{oname}/%{oname}-config-session/*
 
 #--------------------------------------------------------------------
 
@@ -454,9 +459,9 @@ License:	GPLv2 or GPLv3
 %{summary}
 
 %files		config-mouse	
-%{_bindir}/%{_name}-config-mouse
-%{_datadir}/applications/%{_name}-config-mouse.desktop
-%{_datadir}/%{_name}/%{_name}-config/%{_name}-config-mouse*.qm
+%{_bindir}/%{oname}-config-mouse
+%{_datadir}/applications/%{oname}-config-mouse.desktop
+%{_datadir}/%{oname}/%{oname}-config/%{oname}-config-mouse*.qm
 
 #--------------------------------------------------------------------
 
@@ -470,8 +475,8 @@ License:	LGPLv2+
 %{summary}
 
 %files		config-appearance	
-%{_bindir}/%{_name}-config-appearance
-%{_datadir}/applications/%{_name}-config-appearance.desktop
+%{_bindir}/%{oname}-config-appearance
+%{_datadir}/applications/%{oname}-config-appearance.desktop
 
 
 #--------------------------------------------------------------------
@@ -487,11 +492,11 @@ Obsoletes:	%{name}-confupdate <= 0.4.1
 Tool to update configuration from razorqt version 0.4.1 to 0.5.0
 
 %files		confupdate
-%{_bindir}/%{_name}-confupdate
-%dir %{_datadir}/%{_name}/%{_name}-confupdate
-%{_datadir}/%{_name}/%{_name}-confupdate/desktop-041-050.py
-%{_datadir}/%{_name}/%{_name}-confupdate/%{_name}-0.5.upd
-%{_libdir}/%{_name}-confupdate_bin/sesion_modules
+%{_bindir}/%{oname}-confupdate
+%dir %{_datadir}/%{oname}/%{oname}-confupdate
+%{_datadir}/%{oname}/%{oname}-confupdate/desktop-041-050.py
+%{_datadir}/%{oname}/%{oname}-confupdate/%{oname}-0.5.upd
+%{_libdir}/%{oname}-confupdate_bin/sesion_modules
 
 #--------------------------------------------------------------------
 
@@ -503,13 +508,46 @@ Group:		System/X11
 RazorQt policykit integration.
 
 %files policykit
-%{_datadir}/%{_name}/%{_name}-policykit-agent/%{_name}-policykit-agent*.qm
+%{_datadir}/%{oname}/%{oname}-policykit-agent/%{oname}-policykit-agent*.qm
 %{_bindir}/razor-policykit-agent
 
 #--------------------------------------------------------------------
+%package -n	lightdm-%{name}-greeter
+Summary:	LightDM greeter that uses the Razor-qt (Qt based) lib kit
+Group:		Graphical desktop/Other
+Provides:	lightdm-greeter
+Requires:	%{name}-data = %{version}-%{release}
+Requires:	%{name}-power = %{version}-%{release}
+Requires:	lightdm
+
+%description -n lightdm-%{name}-greeter
+A LightDM greeter that uses the Razor-qt and Qt libraries, it was written
+for Razor-qt but it can be used standalone as well.
+
+This package is part of the Razor-qt.
+
+%files -n lightdm-%{name}-greeter
+%{_bindir}/razor-lightdm-greeter
+%{_datadir}/xgreeters/lightdm-razor-greeter.desktop
+%{_datadir}/%{oname}/%{oname}-lightdm-greeter/%{oname}-lightdm-greeter_*.qm
+
+%post -n lightdm-%{name}-greeter
+%{_sbindir}/update-alternatives \
+	--install %{_datadir}/xgreeters/lightdm-greeter.desktop \
+	lightdm-greeter \
+	%{_datadir}/xgreeters/lightdm-razor-greeter.desktop \
+	10
+
+%postun -n lightdm-%{name}-greeter
+if [ $1 -eq 0 ]; then
+%{_sbindir}/update-alternatives \
+	--remove lightdm-greeter \
+	%{_datadir}/xgreeters/lightdm-razor-greeter.desktop
+fi
 
 %prep
 %setup -q
+%apply_patches
 # silence rpmlint's complains about non-readable
 # source files in debuginfo
 find . -name "*.cpp" -o -name "*.h" -o -name LICENSE |xargs chmod 0644
@@ -518,7 +556,6 @@ find . -name "*.cpp" -o -name "*.h" -o -name LICENSE |xargs chmod 0644
 %cmake_qt4
 %make 
 
-#% find_lang %{name}
 
 %install
 %makeinstall_std -C build
@@ -532,14 +569,14 @@ done
 # the session file
 
 mkdir -p %{buildroot}%{_sysconfdir}/X11/wmsession.d
-outfile=%{buildroot}%{_sysconfdir}/X11/wmsession.d/05%{_name}
+outfile=%{buildroot}%{_sysconfdir}/X11/wmsession.d/05%{oname}
 
 cat > $outfile << EOF
 NAME=RazorDesktop
 DESC=The RazorQt Desktop Environment
-EXEC=/usr/bin/start%{_name}
+EXEC=/usr/bin/start%{oname}
 SCRIPT:
-exec /usr/bin/start%{_name}
+exec /usr/bin/start%{oname}
 
 EOF
 
