@@ -4,7 +4,7 @@
 
 Name:		%{oname}qt
 Version:	0.5.2
-Release:	%mkrel 1
+Release:	2
 License:	LGPLv2+
 Source0:	https://github.com/downloads/Razor-qt/razor-qt/%{name}-%{version}.tar.bz2
 Group:		Graphical desktop/Other
