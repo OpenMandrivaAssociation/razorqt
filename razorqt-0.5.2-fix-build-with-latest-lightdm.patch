@@ -1,0 +1,25 @@
+From 71e4d5f233fd6b5059a39ef3003a5b66c341f3c4 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Jani=20V=C3=A4limaa?= <wally@mageia.org>
+Date: Sat, 25 May 2013 12:19:40 +0000
+Subject: [PATCH] Fix build with latest lightdm
+
+---
+ razorqt-lightdm-greeter/CMakeLists.txt | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/razorqt-lightdm-greeter/CMakeLists.txt b/razorqt-lightdm-greeter/CMakeLists.txt
+index 93e3718..93711c3 100644
+--- a/razorqt-lightdm-greeter/CMakeLists.txt
++++ b/razorqt-lightdm-greeter/CMakeLists.txt
+@@ -24,7 +24,7 @@ include ( ${QT_USE_FILE} )
+ # check for new version
+ include(FindPkgConfig)
+ message(STATUS "Checking for lightdm-qt...")
+-pkg_check_modules(LIGHTDM_QT liblightdm-qt-2)
++pkg_check_modules(LIGHTDM_QT liblightdm-qt-3)
+ # or lightdm v1 if the version 2 is not found
+ if (NOT LIGHTDM_QT_FOUND)
+     message(STATUS "lightdm2 for Qt is not found. Trying to find v1")
+-- 
+1.8.1.5
+
