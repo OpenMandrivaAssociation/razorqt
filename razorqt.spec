@@ -504,7 +504,6 @@ Tool to update configuration from razorqt version 0.4.1 to 0.5.0
 Summary:	RazorQt policykit integration
 Group:		System/X11
 
-
 %description policykit-agent
 RazorQt policykit integration.
 
