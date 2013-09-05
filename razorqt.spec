@@ -4,7 +4,7 @@
 
 Name:		%{oname}qt
 Version:	0.5.2
-Release:	2
+Release:	3
 License:	LGPLv2+
 Source0:	https://github.com/downloads/Razor-qt/razor-qt/%{name}-%{version}.tar.bz2
 Group:		Graphical desktop/Other
@@ -500,14 +500,15 @@ Tool to update configuration from razorqt version 0.4.1 to 0.5.0
 
 #--------------------------------------------------------------------
 
-%package	policykit
+%package	policykit-agent
 Summary:	RazorQt policykit integration
 Group:		System/X11
 
-%description policykit
+
+%description policykit-agent
 RazorQt policykit integration.
 
-%files policykit
+%files policykit-agent
 %{_datadir}/%{oname}/%{oname}-policykit-agent/%{oname}-policykit-agent*.qm
 %{_bindir}/razor-policykit-agent
 
