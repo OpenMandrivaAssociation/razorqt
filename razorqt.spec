@@ -1,35 +1,34 @@
-%define qtxdglibdevel	%mklibname qtxdg -d
-%define libnamedevel	%mklibname  %name -d
+%define devqtxdg	%mklibname qtxdg -d
+%define devname	%mklibname  %{name} -d
 %define oname		razor
 
+Summary:	Razor is a lightweight desktop toolbox
 Name:		%{oname}qt
 Version:	0.5.2
 Release:	7
 License:	LGPLv2+
-Source0:	https://github.com/downloads/Razor-qt/razor-qt/%{name}-%{version}.tar.bz2
 Group:		Graphical desktop/Other
-Summary:	Razor is a lightweight desktop toolbox
 Url:		http://%{oname}-qt.org
-
+Source0:	http://razor-qt.org/downloads/%{name}-%{version}.tar.bz2
+Source100:	%{name}.rpmlintrc
 Patch0:		%{oname}-panel-quicklaunch.patch
 Patch1:		razorqt-0.5.2-fix-build-with-latest-lightdm.patch
-
-BuildRequires:	gcc-c++
 BuildRequires:	cmake
+BuildRequires:	desktop-file-utils
 BuildRequires:	doxygen
+BuildRequires:	gcc-c++
+BuildRequires:	qt4-linguist
 BuildRequires:	magic-devel
 BuildRequires:	qt4-devel
-BuildRequires:	qt4-linguist
-BuildRequires:	pkgconfig(xcomposite)
-BuildRequires:	pkgconfig(udev)
-BuildRequires:	pkgconfig(polkit-qt-1)
 BuildRequires:	pkgconfig(liblightdm-qt-3)
-BuildRequires:	pkgconfig(polkit-qt-agent-1)
-BuildRequires:	pkgconfig(xcursor)
 BuildRequires:	pkgconfig(libpulse)
 BuildRequires:	pkgconfig(libstatgrab)
-BuildRequires:	desktop-file-utils
-
+BuildRequires:	pkgconfig(polkit-qt-1)
+BuildRequires:	pkgconfig(polkit-qt-agent-1)
+BuildRequires:	pkgconfig(udev)
+BuildRequires:	pkgconfig(xcomposite)
+BuildRequires:	pkgconfig(xcursor)
+BuildRequires:	pkgconfig(xdamage)
 
 %description
 Razor-qt is an advanced, easy-to-use, and fast desktop environment based on 
@@ -41,83 +40,83 @@ and an intuitive interface.
 %define		librazormount_major 0
 %define		librazormount %mklibname razormount %{librazormount_major}
 
-%package -n	%librazormount
+%package -n	%{librazormount}
 Summary:	RazorQt shared library
 Group:		System/Libraries
 License:	LGPLv2+
 
-%description -n %librazormount
+%description -n %{librazormount}
 %{summary}
 
-%files -n	%librazormount
-%_libdir/lib%{oname}mount.so.%{librazormount_major}*
+%files -n	%{librazormount}
+%{_libdir}/lib%{oname}mount.so.%{librazormount_major}*
 
 #------------------------------------------------------------------------------
 
 %define		librazorqt_major 0
 %define		librazorqt %mklibname razorqt %{librazorqt_major}
 
-%package -n	%librazorqt
+%package -n	%{librazorqt}
 Summary:	RazorQt shared library
 Group:		System/Libraries
 License:	LGPLv2+
 
-%description -n %librazorqt
+%description -n %{librazorqt}
 %{summary}
 
-%files -n	%librazorqt
-%_libdir/lib%{oname}qt.so.%{librazorqt_major}*
+%files -n	%{librazorqt}
+%{_libdir}/lib%{oname}qt.so.%{librazorqt_major}*
 
 #------------------------------------------------------------------------------
 
 %define		librazorqxt_major 0
 %define		librazorqxt %mklibname razorqxt %{librazorqxt_major}
 
-%package -n	%librazorqxt
+%package -n	%{librazorqxt}
 Summary:	Customized part of the libqxt library
 Group:		System/Libraries
 # BSD3 (gpl2 and gpl3 compatible, as from http://fedoraproject.org/wiki/Licensing#SoftwareLicenses)
 License:	BSD
 
-%description -n %librazorqxt
+%description -n %{librazorqxt}
 %{summary}
 
-%files -n	%librazorqxt
+%files -n	%{librazorqxt}
 %doc libraries/%{oname}qxt/LICENSE
-%_libdir/lib%{oname}qxt.so.%{librazorqxt_major}*
+%{_libdir}/lib%{oname}qxt.so.%{librazorqxt_major}*
 
 #------------------------------------------------------------------------------
 
 %define		libqtxdg_major 0
 %define		libqtxdg %mklibname qtxdg %{libqtxdg_major}
 
-%package -n	%libqtxdg
+%package -n	%{libqtxdg}
 Summary:	Xdg manipulation library using Qt4
 Group:		System/Libraries
 # qiconloader.cpp and qiconloader_p.h -> lgplv2
 # xdg* files -> lgplv2+
 License:	LGPLv2+
 
-%description -n %libqtxdg
+%description -n %{libqtxdg}
 %{summary}
 
-%files -n	%libqtxdg
-%_libdir/libqtxdg.so.%{libqtxdg_major}*
+%files -n	%{libqtxdg}
+%{_libdir}/libqtxdg.so.%{libqtxdg_major}*
 
 #--------------------------------------------------------------------
 
-%package -n     %libnamedevel
+%package -n     %{devname}
 Summary:	RazorQt development package
 Group:		Development/Other
-Requires:	%librazormount = %{version}-%{release}
-Requires:	%librazorqt = %{version}-%{release}
-Requires:	%librazorqxt = %{version}-%{release}
 License:	GPLv2 and LGPLv2+
+Requires:	%{librazormount} = %{version}-%{release}
+Requires:	%{librazorqt} = %{version}-%{release}
+Requires:	%{librazorqxt} = %{version}-%{release}
 
-%description -n %libnamedevel
+%description -n %{devname}
 %{summary}
 
-%files -n	%libnamedevel
+%files -n	%{devname}
 %{_libdir}/lib%{oname}*.so
 %{_includedir}/%{oname}*/
 %{_bindir}/%{oname}-x11info
@@ -127,16 +126,16 @@ License:	GPLv2 and LGPLv2+
 
 #------------------------------------------------------------------------------
 
-%package -n     %{qtxdglibdevel}
+%package -n     %{devqtxdg}
 Summary:	Development files for QtXdg library
 Group:		Development/Other
 Requires:	%{libqtxdg} = %{version}-%{release}
 License:	LGPLv2+
 
-%description -n %{qtxdglibdevel}
+%description -n %{devqtxdg}
 %{summary}
 
-%files -n	%{qtxdglibdevel}
+%files -n	%{devqtxdg}
 %{_libdir}/libqtxdg.so
 %{_includedir}/qtxdg/
 %{_libdir}/pkgconfig/qtxdg.pc
@@ -146,9 +145,8 @@ License:	LGPLv2+
 %package	appswitcher
 Summary:	RazorQt application switcher
 Group:		System/X11
-Requires:	%{name}-data = %{version}-%{release}
 License:	LGPLv2+
-
+Requires:	%{name}-data = %{version}-%{release}
 Conflicts:	%{name}-appswitcher <= 0.4.1
 Obsoletes:	%{name}-appswitcher <= 0.4.1
 
@@ -163,10 +161,9 @@ Obsoletes:	%{name}-appswitcher <= 0.4.1
 %package	desktop
 Summary:	RazorQt desktop
 Group:		Graphical desktop/Other
+License:	LGPLv2+
 Requires:	%{name}-data = %{version}-%{release}
 Requires:	%{name}-config-desktop = %{version}-%{release}
-License:	LGPLv2+
-
 Conflicts:	%{name}-desktop <= 0.4.1
 Obsoletes:	%{name}-desktop <= 0.4.1
 
@@ -189,7 +186,6 @@ License:	LGPLv2+
 Requires:	%{name}-data  = %{version}-%{release}
 Requires:	%{name}-config-appearance = %{version}-%{release}
 Requires:	%{name}-config-mouse = %{version}-%{release}
-
 Conflicts:	%{name}-panel <= 0.4.1
 Obsoletes:	%{name}-panel <= 0.4.1
 
@@ -207,7 +203,6 @@ Obsoletes:	%{name}-panel <= 0.4.1
 %package	data
 Summary:	RazorQt resources and shared data
 Group:		Graphical desktop/Other
-
 Conflicts:	%{name}-data <= 0.4.1
 Obsoletes:	%{name}-data <= 0.4.1
 
@@ -215,31 +210,31 @@ Obsoletes:	%{name}-data <= 0.4.1
 %{summary}
 
 %files		data
+%config %{_sysconfdir}/%{oname}/%{oname}.conf
+%config %{_sysconfdir}/xdg/menus/%{oname}-applications.menu
+%config %{_sysconfdir}/xdg/autostart/*.desktop
+%config %{_sysconfdir}/%{oname}/windowmanagers.conf
 %dir %{_datadir}/%{oname}
 %dir %{_datadir}/%{oname}/themes
 %dir %{_datadir}/%{oname}/graphics
-%{_sysconfdir}/%{oname}/%{oname}.conf
 %{_datadir}/%{oname}/graphics/*
 %{_datadir}/%{oname}/themes/*
-%config %_sysconfdir/xdg/menus/%{oname}-applications.menu
-%config %_sysconfdir/xdg/autostart/*.desktop
-%config %_sysconfdir/%{oname}/windowmanagers.conf
 %{_datadir}/desktop-directories/%{oname}*
 %{_datadir}/lib%{name}
 %{_datadir}/libqtxdg/
 # temp files - it will be removed when it becomes part of upstream
-%{_libdir}/%{oname}-xdg-tools
-%{_datadir}/icons/hicolor/scalable/apps/laptop-lid*
+%{_iconsdir}/hicolor/scalable/apps/laptop-lid*
+#{_libdir}/%{oname}-xdg-tools
 
 #--------------------------------------------------------------------
 
 %package	autosuspend
 Summary:	RazorQt autosuspend application
 Group:		Graphical desktop/Other
+License:	LGPLv2+
 Requires:	%{name}-data = %{version}-%{release}
 Requires:	%{name}-config-autosuspend = %{version}-%{release}
 Requires:	%{name}-power = %{version}-%{release}
-License:	LGPLv2+
 
 %description	autosuspend
 %{summary}
@@ -276,9 +271,8 @@ Obsoletes:	%{name}-power <= 0.4.1
 %package	runner
 Summary:	RazorQt runner application
 Group:		Graphical desktop/Other
-Requires:	%{name}-data = %{version}-%{release}
 License:	LGPLv2+
-
+Requires:	%{name}-data = %{version}-%{release}
 Conflicts:	%{name}-runner <= 0.4.1
 Obsoletes:	%{name}-runner <= 0.4.1
 
@@ -322,13 +316,12 @@ Requires:	%{name}-config-globalkeyshortcuts
 %package	session
 Summary:	RazorQt session
 Group:		Graphical desktop/Other
+License:	LGPLv2+
 Requires:	%{name}-data = %{version}-%{release}
 Requires:	%{name}-config-session = %{version}-%{release}
 Requires:	%{name}-notificationd = %{version}-%{release}
 Requires:	%{name}-globalkeyshortcuts = %{version}-%{release}
 Requires:	openbox
-License:	LGPLv2+
-
 Conflicts:	%{name}-session <= 0.4.1
 Obsoletes:	%{name}-session <= 0.4.1
 Obsoletes:	%{name}-openbox <= %{version}, %{name}-wm <= %{version}
@@ -355,7 +348,6 @@ Summary:	RazorQt config tools
 Group:		Graphical desktop/Other
 License:	LGPLv2+
 Requires:	%{name}-data = %{version}-%{release}
-
 Conflicts:	%{name}-config <= 0.4.1
 Obsoletes:	%{name}-config <= 0.4.1
 
@@ -366,7 +358,7 @@ Obsoletes:	%{name}-config <= 0.4.1
 %{_bindir}/%{oname}-config
 %{_datadir}/applications/%{oname}-config.desktop
 %{_datadir}/applications/%{oname}-config-qtconfig.desktop
-%config %_sysconfdir/xdg/menus/%{oname}-config.menu
+%config %{_sysconfdir}/xdg/menus/%{oname}-config.menu
 %dir %{_datadir}/%{oname}/%{oname}-config
 %{_datadir}/%{oname}/%{oname}-config/razor-config-appearance*.qm
 %{_datadir}/%{oname}/%{oname}-config/%{oname}-config_*.qm
@@ -452,8 +444,8 @@ Requires:	%{name}-config = %{version}-%{release}
 %package	config-mouse
 Summary:	RazorQt mouse configuration tool
 Group:		Graphical desktop/Other
-Requires:	%{name}-config = %{version}-%{release}
 License:	GPLv2 or GPLv3
+Requires:	%{name}-config = %{version}-%{release}
 
 %description	config-mouse
 %{summary}
@@ -468,8 +460,8 @@ License:	GPLv2 or GPLv3
 %package	config-appearance
 Summary:	RazorQt appearance configuration tool
 Group:		Graphical desktop/Other
-Requires:	%{name}-config = %{version}-%{release}
 License:	LGPLv2+
+Requires:	%{name}-config = %{version}-%{release}
 
 %description	config-appearance
 %{summary}
@@ -483,8 +475,8 @@ License:	LGPLv2+
 
 %package	confupdate
 Summary:	RazorQt configuration update tool
+Group:		Graphical desktop/Other
 Requires:	%{name}-data = %{version}-%{release}
-
 Conflicts:	%{name}-confupdate <= 0.4.1
 Obsoletes:	%{name}-confupdate <= 0.4.1
 
@@ -512,6 +504,7 @@ RazorQt policykit integration.
 %{_bindir}/razor-policykit-agent
 
 #--------------------------------------------------------------------
+
 %package -n	lightdm-%{name}-greeter
 Summary:	LightDM greeter that uses the Razor-qt (Qt based) lib kit
 Group:		Graphical desktop/Other
@@ -553,9 +546,9 @@ fi
 find . -name "*.cpp" -o -name "*.h" -o -name LICENSE |xargs chmod 0644
 
 %build
-%cmake_qt4
+%cmake_qt4 \
+	-DBUNDLE_XDG_UTILS=No
 %make 
-
 
 %install
 %makeinstall_std -C build
@@ -582,3 +575,4 @@ EOF
 
 rm -f %{buildroot}%{_datadir}/apps/kdm/sessions/*.desktop
 rm -f %{buildroot}%{_datadir}/xsessions/*.desktop
+
