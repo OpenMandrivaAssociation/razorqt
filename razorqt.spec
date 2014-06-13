@@ -5,7 +5,7 @@
 Summary:	Razor is a lightweight desktop toolbox
 Name:		%{oname}qt
 Version:	0.5.2
-Release:	7
+Release:	8
 License:	LGPLv2+
 Group:		Graphical desktop/Other
 Url:		http://%{oname}-qt.org
