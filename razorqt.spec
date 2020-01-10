@@ -540,7 +540,7 @@ fi
 
 %prep
 %setup -q
-%apply_patches
+%autopatch -p1
 # silence rpmlint's complains about non-readable
 # source files in debuginfo
 find . -name "*.cpp" -o -name "*.h" -o -name LICENSE |xargs chmod 0644
