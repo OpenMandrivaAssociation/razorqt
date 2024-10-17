@@ -8,7 +8,7 @@ Version:	0.5.2
 Release:	9
 License:	LGPLv2+
 Group:		Graphical desktop/Other
-Url:		http://%{oname}-qt.org
+Url:		https://%{oname}-qt.org
 Source0:	http://razor-qt.org/downloads/%{name}-%{version}.tar.bz2
 Source100:	%{name}.rpmlintrc
 Patch0:		%{oname}-panel-quicklaunch.patch
